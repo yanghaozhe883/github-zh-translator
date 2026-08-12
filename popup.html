@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GitHub 中文翻译</title>
+  <style>
+    :root { --fg:#24292f; --muted:#57606a; --brand:#0969da; --bg:#fff; --border:#d0d7de; }
+    * { box-sizing:border-box; }
+    body { width:300px; margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; color:var(--fg); background:var(--bg); }
+    .head { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--border); }
+    .head h1 { font-size:14px; margin:0; font-weight:600; }
+    .switch { position:relative; width:40px; height:22px; }
+    .switch input { opacity:0; width:0; height:0; }
+    .slider { position:absolute; inset:0; background:#ccc; border-radius:22px; transition:.2s; cursor:pointer; }
+    .slider:before { content:""; position:absolute; width:18px; height:18px; left:2px; top:2px; background:#fff; border-radius:50%; transition:.2s; }
+    input:checked + .slider { background:var(--brand); }
+    input:checked + .slider:before { transform:translateX(18px); }
+    .body { padding:12px 14px; }
+    label.f { display:block; font-size:12px; color:var(--muted); margin:10px 0 4px; }
+    select, input[type=text], input[type=password] { width:100%; padding:6px 8px; border:1px solid var(--border); border-radius:6px; font-size:13px; }
+    .hint { font-size:11px; color:var(--muted); margin-top:4px; line-height:1.4; }
+    .row { display:flex; align-items:center; gap:6px; font-size:13px; margin-top:4px; }
+    .row input { width:auto; }
+    .save { margin-top:12px; width:100%; padding:8px; background:var(--brand); color:#fff; border:none; border-radius:6px; font-size:13px; cursor:pointer; }
+    .save:active { opacity:.85; }
+    .status { font-size:12px; margin-top:8px; min-height:16px; }
+    .status.ok { color:#1a7f37; }
+    .status.err { color:#cf222e; }
+    .foot { padding:8px 14px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <h1>GitHub 中文翻译</h1>
+    <label class="switch">
+      <input type="checkbox" id="toggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="body">
+    <label class="f">翻译引擎</label>
+    <select id="engine">
+      <option value="google">Google 翻译（免费，无需 Key）</option>
+      <option value="deepseek">DeepSeek（质量好，需 API Key）</option>
+      <option value="deepl">DeepL（需 API Key）</option>
+    </select>
+
+    <div id="deepseek-block" style="display:none">
+      <label class="f">DeepSeek API Key</label>
+      <input type="password" id="deepseekKey" placeholder="sk-..." />
+      <div class="hint">从 platform.deepseek.com 获取，费用很低。</div>
+    </div>
+
+    <div id="deepl-block" style="display:none">
+      <label class="f">DeepL API Key</label>
+      <input type="password" id="deeplKey" placeholder="..." />
+    </div>
+
+    <label class="row">
+      <input type="checkbox" id="translateUi" />
+      同时翻译界面按钮/导航（默认只翻译正文）
+    </label>
+
+    <button class="save" id="save">保存设置</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="foot">打开 GitHub 页面即可自动翻译；本插件不翻译代码。</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
